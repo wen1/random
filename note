@@ -30,3 +30,13 @@ ParseResult(scheme='http', netloc='www.ccs.neu.edu', path='/wp-content/uploads/g
 >>> head[5]
 ('content-type', 'application/pdf')
 
+
+>>> import robotparser
+>>> rp = robotparser.RobotFileParser()
+>>> rp.set_url("http://www.musi-cal.com/robots.txt")
+>>> rp.read()
+>>> rp.can_fetch("*", "http://www.musi-cal.com/cgi-bin/search?city=San+Francisco")
+False
+>>> rp.can_fetch("*", "http://www.musi-cal.com/")
+True
+
