@@ -1,4 +1,4 @@
-	1.	filter the type of file 			---------httplib
+	1.	filter the type of file 			---------httplib, urlparse
 	2.	respect robots.txt			---------robotparser
 
 
@@ -13,6 +13,10 @@ The real proper way is to not use file extensions at all. Do a GET (or HEAD) req
 >>> print res.getheaders()
 [('content-length', '0'), ('expires', '-1'), ('server', 'gws'), ('cache-control', 'private, max-age=0'), ('date', 'Sat, 20 Sep 2008 06:43:36 GMT'), ('content-type', 'text/html; charset=ISO-8859-1')]
 
+>>> import urlparse
+>>> urlObject = urlparse.urlparse("http://www.ccs.neu.edu/wp-content/uploads/gradchecklist.pdf")
+>>> urlObject
+ParseResult(scheme='http', netloc='www.ccs.neu.edu', path='/wp-content/uploads/gradchecklist.pdf', params='', query='', fragment='')
 
 >>> import httplib
 >>> conn = httplib.HTTPConnection("www.ccs.neu.edu")
@@ -23,4 +27,6 @@ The real proper way is to not use file extensions at all. Do a GET (or HEAD) req
 >>> head = res.getheaders()
 >>> head["content-type"] ****not working****>>> print head
 [('content-length', '144230'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.14 (Ubuntu)'), ('last-modified', 'Tue, 13 Nov 2012 20:17:42 GMT'), ('date', 'Thu, 19 Sep 2013 15:04:26 GMT'), ('content-type', 'application/pdf')]
->>> 
+>>> head[5]
+('content-type', 'application/pdf')
+
